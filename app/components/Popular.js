@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
+import MenuItem from './MenuItem';
+import propTypes from 'prop-types';
+
 
 class Popular extends Component {
-    state = {
-        selectedLanguage: 'All'
-    };
-
-    updateLanguage = () => {
-        this.setState({
-            selectedLanguage: null
-        });
-    }
 
     render() {
         const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
         
         return (
             <ul className="languages">
-                {languages.map(item => {
-                    return (<li key={item} 
-                                onClick={this.updateLanguage}>
-                                    {item}
-                            </li>
-                            )
-                })}
+                {Object.keys(languages).map(key => {
+                    return (
+                        <MenuItem style={languages[key] === this.props.selectedLanguage ? {color: 'lightskyblue'} : null}
+                            key={key} 
+                            updateLanguage={this.props.updateLanguage}
+                            lang={languages[key]}
+                        />
+                    )
+                })}                   
             </ul>
         )
-    }
+    };
+};
+
+
+Popular.propTypes = {
+    selectedLanguage: propTypes.string.isRequired,
+    updateLanguage: propTypes.func.isRequired
 }
 
 export default Popular;

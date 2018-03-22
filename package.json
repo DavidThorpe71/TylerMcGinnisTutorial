@@ -12,7 +12,12 @@
       "react"
     ],
     "plugins": [
-      ["transform-class-properties", { "spec": true }]
+      [
+        "transform-class-properties",
+        {
+          "spec": true
+        }
+      ]
     ]
   },
   "repository": {
@@ -26,6 +31,7 @@
   },
   "homepage": "https://github.com/DavidThorpe71/TylerMcGinnisTutorial#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.0-alpha.1",
     "react-dom": "^16.3.0-alpha.1"
