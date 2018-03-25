@@ -1,41 +1,25 @@
 import React from 'react';
-import api from '../utils/api';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Popular from './Popular';
-import RepoGrid from './RepoGrid';
+import Nav from './Nav';
+import Home from './Home';
+import Battle from "./Battle";
+import NotFound from './NotFound';
 
 class App extends React.Component {
-    state = {
-        selectedLanguage: 'All',
-        repos: null
-    };
-
-    updateLanguage = (lang) => {
-        this.setState({
-            selectedLanguage: lang
-        });
-        api.fetchPopularRepos(lang)
-            .then(repos => {
-                this.setState({
-                    repos
-                })
-            })
-    }
-
-    componentDidMount() {
-        this.updateLanguage(this.state.selectedLanguage);
-    }
-
     render() {
         return (
-            <div className="container">
-                <Popular 
-                    selectedLanguage={this.state.selectedLanguage} 
-                    updateLanguage={this.updateLanguage} 
-                />
-                {!this.state.repos ? <p>Loading...</p> :
-                    <RepoGrid repos={this.state.repos} />
-                }
-            </div>
+            <BrowserRouter>
+                <div className="container">
+                    <Nav />
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route path='/battle' component={Battle} />
+                        <Route path='/popular' component={Popular} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </div>
+            </BrowserRouter>
         )
     }
 }
